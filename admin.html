@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel | MediaHub</title>
+
+  <!-- ✅ Keep same theme (no change) -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login.css" />
+
+  <!-- ✅ Admin Only CSS -->
+  <link rel="stylesheet" href="admin.css" />
+</head>
+
+<body class="login-page">
+
+<!-- ================================================= -->
+<!-- [A] ADMIN LOGIN GUARD -->
+<!-- ================================================= -->
+<script>
+  if (localStorage.getItem("mediahub_logged_in") !== "true") {
+    window.location.href = "login.html";
+  }
+  if (localStorage.getItem("mediahub_role") !== "admin") {
+    window.location.href = "index.html";
+  }
+</script>
+
+<!-- ================================================= -->
+<!-- [A-H] HEADER (SAME THEME) -->
+<!-- ================================================= -->
+<header class="login-header">
+  <h2>🛡️ Admin Panel | Li Cell News & Media Hub</h2>
+  <p>Admin Access Only</p>
+</header>
+
+<!-- ================================================= -->
+<!-- [A-M] ADMIN LAYOUT -->
+<!-- ================================================= -->
+<div class="admin-wrap">
+
+  <!-- ============================== -->
+  <!-- [A-SB] SIDEBAR -->
+  <!-- ============================== -->
+  <aside class="admin-sidebar">
+    <div class="admin-profile">
+      <img src="assets/logo.png" alt="Logo" class="admin-logo">
+      <div class="admin-profile-text">
+        <div class="admin-name">Admin</div>
+        <div class="admin-user">Logged: <b id="adminUser">admin</b></div>
+      </div>
+    </div>
+
+    <nav class="admin-menu">
+      <button class="admin-menu-btn active" onclick="showPanel('dashboard')">📊 Dashboard</button>
+      <button class="admin-menu-btn" onclick="showPanel('users')">👤 Users</button>
+      <button class="admin-menu-btn" onclick="showPanel('notice')">📝 Notice Board</button>
+      <button class="admin-menu-btn" onclick="showPanel('settings')">⚙️ Settings</button>
+    </nav>
+
+    <button class="admin-logout" onclick="logout()">🔒 Logout</button>
+  </aside>
+
+  <!-- ============================== -->
+  <!-- [A-C] CONTENT -->
+  <!-- ============================== -->
+  <main class="admin-content">
+
+    <!-- ============================== -->
+    <!-- [A-P1] DASHBOARD -->
+    <!-- ============================== -->
+    <section id="panel-dashboard" class="admin-panel show">
+      <h2 class="admin-title">📊 Dashboard</h2>
+      <p class="admin-sub">
+        এখানে আপনি MediaHub এর summary বা control info রাখতে পারবেন।
+      </p>
+
+      <div class="admin-cards">
+        <div class="admin-card">
+          <div class="admin-card-title">👤 Total Users</div>
+          <div class="admin-card-value" id="totalUsers">0</div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-title">📝 Saved Note</div>
+          <div class="admin-card-value" id="noteStatus">No</div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-title">⚙️ System</div>
+          <div class="admin-card-value">Active ✅</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- [A-P2] USERS PANEL -->
+    <!-- ============================== -->
+    <section id="panel-users" class="admin-panel">
+      <h2 class="admin-title">👤 Users Management</h2>
+      <p class="admin-sub">
+        নতুন user যোগ করুন, role পরিবর্তন করুন, delete করুন।
+      </p>
+
+      <div class="admin-form-grid">
+        <input id="newUser" placeholder="New Username">
+        <input id="newPass" placeholder="Password">
+        <select id="newRole">
+          <option value="admin">admin</option>
+          <option value="editor">editor</option>
+          <option value="viewer">viewer</option>
+        </select>
+      </div>
+
+      <button class="admin-btn" onclick="addUser()">➕ Add User</button>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Role</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="usersTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- [A-P3] NOTICE BOARD -->
+    <!-- ============================== -->
+    <section id="panel-notice" class="admin-panel">
+      <h2 class="admin-title">📝 Admin Notice Board</h2>
+      <p class="admin-sub">
+        এখানে গুরুত্বপূর্ণ নোট/ইনফো লিখে সেভ রাখতে পারবেন।
+      </p>
+
+      <textarea id="adminNote" class="admin-textarea"
+        placeholder="এখানে আপনার তথ্য লিখুন..."></textarea>
+
+      <button class="admin-btn" onclick="saveAdminNote()">✅ Save Note</button>
+    </section>
+
+    <!-- ============================== -->
+    <!-- [A-P4] SETTINGS PLACEHOLDER -->
+    <!-- ============================== -->
+    <section id="panel-settings" class="admin-panel">
+      <h2 class="admin-title">⚙️ Settings</h2>
+      <p class="admin-sub">
+        ভবিষ্যতে এখানে settings panel যোগ হবে।
+      </p>
+
+      <div class="admin-card">
+        <div class="admin-card-title">Coming Soon ✅</div>
+        <div class="admin-card-value">Upgrade Ready</div>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<!-- ================================================= -->
+<!-- [A-F] FOOTER -->
+<!-- ================================================= -->
+<footer class="login-footer">
+  © 2026 MediaHub | Admin Panel
+</footer>
+
+<!-- ✅ Admin JS -->
+<script src="admin.js"></script>
+
+</body>
+</html>

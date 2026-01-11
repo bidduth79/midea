@@ -1,0 +1,235 @@
+/* ================================================= */
+/* [A] ADMIN PANEL STYLE (SAME THEME) */
+/* ================================================= */
+
+.admin-wrap{
+  display:flex;
+  gap:18px;
+  padding:18px;
+  max-width:1200px;
+  margin:0 auto;
+  width:100%;
+}
+
+/* ============================== */
+/* [A-SB] Sidebar */
+/* ============================== */
+.admin-sidebar{
+  width:260px;
+  background:rgba(17,24,39,0.92);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  box-shadow:0 0 28px rgba(0,0,0,0.4);
+}
+
+.admin-profile{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:12px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px;
+}
+
+.admin-logo{
+  width:52px;
+  height:52px;
+  object-fit:contain;
+}
+
+.admin-name{
+  color:#fff;
+  font-weight:900;
+  font-size:16px;
+}
+
+.admin-user{
+  color:#cbd5e1;
+  font-size:12px;
+  opacity:0.9;
+}
+
+/* Menu */
+.admin-menu{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.admin-menu-btn{
+  border:none;
+  cursor:pointer;
+  text-align:left;
+  padding:12px 12px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  color:#fff;
+  font-size:14px;
+  font-weight:700;
+  transition:0.2s;
+}
+
+.admin-menu-btn:hover{
+  background:rgba(121,5,5,0.12);
+  border-color:rgba(121,5,5,0.35);
+  transform:translateY(-1px);
+}
+
+.admin-menu-btn.active{
+  background:rgba(121,5,5,0.18);
+  border-color:rgba(121,5,5,0.45);
+}
+
+/* Logout */
+.admin-logout{
+  margin-top:auto;
+  border:none;
+  cursor:pointer;
+  padding:12px;
+  border-radius:14px;
+  background:#790505;
+  color:#fff;
+  font-weight:900;
+  font-size:15px;
+  transition:0.2s;
+}
+.admin-logout:hover{
+  background:#2e0101;
+  transform:translateY(-1px);
+}
+
+/* ============================== */
+/* [A-C] Content */
+/* ============================== */
+.admin-content{
+  flex:1;
+  background:rgba(17,24,39,0.92);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 0 28px rgba(0,0,0,0.4);
+}
+
+.admin-title{
+  margin:0 0 8px;
+  color:#fff;
+  font-size:22px;
+  font-weight:900;
+}
+
+.admin-sub{
+  margin:0 0 16px;
+  color:#cbd5e1;
+  opacity:0.85;
+  line-height:1.6;
+}
+
+/* panels */
+.admin-panel{ display:none; }
+.admin-panel.show{ display:block; }
+
+/* cards */
+.admin-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:14px;
+}
+.admin-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px;
+  padding:16px;
+}
+.admin-card-title{ color:#fff; font-weight:800; }
+.admin-card-value{ color:#cbd5e1; font-size:20px; font-weight:900; margin-top:8px; }
+
+/* users form */
+.admin-form-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.admin-form-grid input,
+.admin-form-grid select{
+  padding:12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:#111827;
+  color:#fff;
+  font-size:14px;
+  outline:none;
+}
+
+.admin-btn{
+  border:none;
+  cursor:pointer;
+  padding:12px 14px;
+  border-radius:14px;
+  background:#790505;
+  color:#fff;
+  font-weight:900;
+  transition:0.2s;
+}
+.admin-btn:hover{
+  background:#2e0101;
+  transform:translateY(-1px);
+}
+
+/* table */
+.admin-table-wrap{
+  margin-top:16px;
+  overflow-x:auto;
+}
+.admin-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:560px;
+}
+.admin-table th{
+  text-align:left;
+  padding:12px;
+  color:#fff;
+  background:rgba(255,255,255,0.04);
+}
+.admin-table td{
+  padding:12px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  color:#cbd5e1;
+}
+.admin-table select{
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:#111827;
+  color:#fff;
+}
+
+/* textarea */
+.admin-textarea{
+  width:100%;
+  min-height:140px;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:#111827;
+  color:#fff;
+  font-size:15px;
+  outline:none;
+}
+
+/* responsive */
+@media(max-width:900px){
+  .admin-wrap{ flex-direction:column; }
+  .admin-sidebar{ width:100%; }
+  .admin-cards{ grid-template-columns:1fr; }
+  .admin-form-grid{ grid-template-columns:1fr; }
+}

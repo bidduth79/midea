@@ -1,0 +1,832 @@
+/* ================================================= */
+/* [0] RESET */
+/* ================================================= */
+* { box-sizing: border-box; }
+
+/* ================================================= */
+/* [0-1] BODY DEFAULT */
+/* ================================================= */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  min-height: 100vh;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* ================================================= */
+/* [0-2] HUB PAGE ONLY */
+/* ================================================= */
+.hub-page main { padding-bottom: 70px; } /* footer fixed space */
+
+/* ================================================= */
+/* [1] HEADER */
+/* ================================================= */
+.header {
+  background: #111;
+  color: #fff;
+  padding: 18px 18px 14px;
+  text-align: center;
+}
+
+/* ✅ Center title */
+.hub-title {
+  margin: 0 0 12px 0;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+/* ================================================= */
+/* [H-1] NAV BAR (NEW GRID) */
+/* ✅ Left | Center(menu) | Right(actions) */
+/* ================================================= */
+.nav-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+/* Left reserved */
+.nav-left { justify-self: start; }
+
+/* Center menu */
+.nav-center {
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+}
+
+/* Right actions */
+.nav-right {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Right actions inner group */
+.right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* ✅ এখানে gap control */
+}
+
+/* ================================================= */
+/* [2] MENU */
+/* ================================================= */
+.menu {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.menu li {
+  background: #333;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+.menu li:hover { background: #5d0303; }
+
+/* ================================================= */
+/* [2-1] Active underline */
+/* ================================================= */
+.menu-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: red;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+.menu > li.active { font-weight: bold; }
+
+/* ================================================= */
+/* [H-2] SEARCH */
+/* ================================================= */
+.search-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+#searchInput {
+  width: 140px;
+  padding: 8px 12px;
+  padding-right: 34px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  transition: width 0.3s ease;
+}
+
+/* Hover expand */
+#searchInput:hover,
+#searchInput:focus {
+  width: 260px;
+  border-color: #fff;
+  box-shadow: 0 0 6px rgba(255,255,255,0.5);
+}
+
+.clear-search {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  display: none;
+  color: #555;
+}
+.clear-search:hover { color: red; }
+
+/* ================================================= */
+/* [RESPONSIVE] NAV */
+/* ================================================= */
+@media (max-width: 1024px) {
+  .nav-bar {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .nav-left, .nav-center, .nav-right {
+    justify-self: center;
+  }
+  .nav-right {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* ================================================= */
+/* [N] DROPDOWN */
+/* ================================================= */
+.dropdown { position: relative; }
+
+.dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  background: #222;
+  border-radius: 6px;
+  display: none;
+  z-index: 2000;
+}
+.dropdown-menu li {
+  padding: 10px 12px;
+  cursor: pointer;
+  background: #222;
+  border-radius: 0;
+  white-space: nowrap;
+}
+.dropdown-menu li:hover { background: #5d0303; }
+.dropdown:hover .dropdown-menu { display: block; }
+
+.dropdown-sub { position: relative; }
+.dropdown-menu-sub {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  min-width: 180px;
+  background: #222;
+  border-radius: 6px;
+  display: none;
+  z-index: 2100;
+}
+.dropdown-menu-sub li {
+  padding: 10px 12px;
+  cursor: pointer;
+  background: #222;
+  white-space: nowrap;
+}
+.dropdown-menu-sub li:hover { background: #5d0303; }
+.dropdown-sub:hover .dropdown-menu-sub,
+.dropdown-menu-sub:hover { display: block; }
+
+/* ================================================= */
+/* [3] GRID */
+/* ================================================= */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+@media (max-width: 1200px) { .card-container { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 768px)  { .card-container { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .card-container { grid-template-columns: 1fr; } }
+
+/* ================================================= */
+/* [7] CARD */
+/* ================================================= */
+.news-card {
+  background: #fff;
+  border: 1px solid #0b0b0b;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.25s ease;
+  position: relative;
+}
+.news-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transform: translateY(-3px);
+}
+
+.news-card img {
+  max-width: 100%;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.news-title { font-size: 16px; font-weight: 800; margin: 5px 0; }
+.news-subtitle { font-size: 12px; color: #555; }
+
+/* ================================================= */
+/* [F] FOOTER */
+/* ================================================= */
+.footer {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0; left: 0; width: 100%;
+  z-index: 1000;
+}
+
+/* ================================================= */
+/* [B] Back to Top */
+/* ================================================= */
+#backToTop {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  z-index: 1001;
+}
+#backToTop:hover { background: #444; }
+
+/* ================================================= */
+/* [SB] Sidebar */
+/* ================================================= */
+.side-panel {
+  position: fixed;
+  top: 0;
+  right: -45%;
+  width: 45%;
+  height: 100%;
+  background: #fff;
+  box-shadow: -4px 0 15px rgba(0,0,0,0.3);
+  z-index: 5000;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.25s ease, left 0.25s ease, width 0.25s ease;
+}
+.side-panel.open { right: 0; }
+.side-panel.left { left: -45%; right: auto; }
+.side-panel.left.open { left: 0; }
+.side-panel.wide { width: 60%; }
+.side-panel.narrow { width: 35%; }
+
+.side-panel-header {
+  background: #111;
+  color: #fff;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.side-panel-actions button {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ================================================= */
+/* [FV] Favorites */
+/* ================================================= */
+.fav-wrap {
+  grid-column: 1 / -1;
+  background: #d5d9d7;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.fav-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 1200px){ .fav-grid{ grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 768px){ .fav-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px){ .fav-grid{ grid-template-columns: 1fr; } }
+
+/* ================================================= */
+/* [FV-1] Fav Button + Open Badge */
+/* ================================================= */
+.open-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  z-index: 6;
+}
+
+/* ================================================= */
+/* [FV-2] Fav Button (Premium) */
+/* ================================================= */
+@keyframes favPop {
+  0%   { transform: scale(0.80); }
+  50%  { transform: scale(1.25); }
+  100% { transform: scale(1.06); }
+}
+@keyframes starSpin {
+  0%   { transform: rotate(0deg) scale(1); }
+  60%  { transform: rotate(18deg) scale(1.25); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+@keyframes sparkle {
+  0%   { transform: scale(0.4); opacity: 0; }
+  30%  { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.fav-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.85);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 900;
+  z-index: 6;
+  transition: 0.18s ease;
+  overflow: visible;
+}
+
+.fav-btn:hover {
+  transform: scale(1.08);
+  background: rgba(121,5,5,0.15);
+  border-color: rgba(121,5,5,0.45);
+  color: #fff;
+}
+
+.fav-btn.is-fav {
+  background: #790505;
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(121,5,5,0.55);
+  transform: scale(1.06);
+  animation: favPop 0.26s ease, starSpin 0.32s ease;
+}
+
+.fav-btn.is-fav::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.32);
+  box-shadow: 0 0 18px rgba(121,5,5,0.60);
+  animation: sparkle 0.40s ease;
+  pointer-events: none;
+}
+
+/* ✅ Light theme fav button visibility */
+body.light-theme .fav-btn {
+  background: rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.20);
+  color: rgba(0,0,0,0.75);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+}
+body.light-theme .fav-btn.is-fav {
+  background: #790505;
+  border: 1px solid rgba(0,0,0,0.10);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(121,5,5,0.45);
+}
+
+/* ================================================= */
+/* [H-5] LOGOUT BUTTON */
+/* ================================================= */
+#logoutBtn {
+  flex-shrink: 0;
+  min-width: 110px;
+  height: 38px;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 0 14px rgba(0,0,0,0.25);
+}
+
+#logoutBtn:hover {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.6);
+  transform: translateY(-1px);
+}
+
+/* ================================================= */
+/* [SocialB] Social Bar */
+/* ================================================= */
+.social-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.live-btn {
+  background: #d50000;
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 8px;
+  font-weight: 900;
+  font-size: 18px;
+  text-decoration: none;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transition: 0.25s ease;
+}
+
+.live-btn:hover {
+  transform: scale(1.05);
+  background: #ff0000;
+}
+
+.social-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transition: 0.25s ease;
+  text-decoration: none;
+}
+.social-icon i { font-size: 16px; color: #fff; }
+.social-icon:hover {
+  transform: translateY(-2px) scale(1.07);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.35);
+}
+.social-icon.fb { background: #3b5998; }
+.social-icon.tw { background: #1da1f2; }
+.social-icon.ig { background: #c13584; }
+.social-icon.pt { background: #bd081c; }
+.social-icon.yt { background: #ff0000; }
+.social-icon.rss { background: #ff9800; }
+
+/* ================================================= */
+/* [THEME] Theme Toggle Button */
+/* ================================================= */
+.theme-toggle {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 1px 8px;
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 14px rgba(0,0,0,0.25);
+}
+.theme-toggle:hover {
+  background: rgba(121,5,5,0.14);
+  border-color: rgba(121,5,5,0.45);
+  transform: translateY(-1px);
+}
+
+/* ================================================= */
+/* [THEME] DARK + LIGHT MODE */
+/* ================================================= */
+body.dark-theme { background: #0f172a; color: #fff; }
+body.light-theme { background: #f2f2f2; color: #111; }
+
+body.dark-theme .header,
+body.dark-theme .footer {
+  background: #111827;
+  color: #fff;
+}
+body.light-theme .header,
+body.light-theme .footer {
+  background: #111;
+  color: #fff;
+}
+
+/* Dark cards */
+body.dark-theme .news-card {
+  background: linear-gradient(
+    140deg,
+    rgba(17, 24, 39, 0.96) 0%,
+    rgba(30, 41, 59, 0.92) 55%,
+    rgba(17, 24, 39, 0.98) 100%
+  );
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.40),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  color: #fff;
+}
+body.dark-theme .news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(121,5,5,0.28);
+}
+body.dark-theme .news-title { color: rgba(255,255,255,0.95); }
+body.dark-theme .news-subtitle { color: rgba(255,255,255,0.72); }
+
+/* Dark logo badge */
+body.dark-theme .news-card img {
+  background: rgba(255,255,255,0.94);
+  padding: 6px 10px;
+  border-radius: 10px;
+  height: 55px;
+  box-shadow: 0 0 14px rgba(0,0,0,0.35);
+}
+
+/* Dark favorites section */
+body.dark-theme .fav-wrap {
+  background: linear-gradient(
+    135deg,
+    rgba(121, 5, 5, 0.18) 0%,
+    rgba(17, 24, 39, 0.92) 55%,
+    rgba(17, 24, 39, 0.96) 100%
+  );
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+}
+body.dark-theme .fav-wrap * {
+  color: rgba(255,255,255,0.92) !important;
+}
+/* ================================================= */
+/* [LANG] Language Toggle Button */
+/* ================================================= */
+.lang-toggle {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 14px rgba(0,0,0,0.25);
+}
+
+.lang-toggle:hover {
+  background: rgba(34,197,94,0.12);
+  border-color: rgba(34,197,94,0.35);
+  transform: translateY(-1px);
+}
+
+.lang-toggle:active {
+  transform: scale(0.98);
+}
+/* ================================================= */
+/* [FV-SUM] Favorites Summary Bar */
+/* ================================================= */
+.fav-summary {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.85;
+  color: rgba(255,255,255,0.88);
+}
+
+/* Light theme */
+body.light-theme .fav-summary {
+  color: rgba(0,0,0,0.72);
+}
+/* ================================================= */
+/* [M-FIX-0] মোবাইলে ডানে-বামে নড়া (horizontal move) বন্ধ */
+/* ================================================= */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* কিছু ক্ষেত্রে 100vw থাকলে horizontal scroll হয় */
+.header, main, .card-container, .nav-bar {
+  max-width: 100%;
+}
+
+/* ================================================= */
+/* [M-FIX-1] মোবাইলে সবকিছু সেন্টার + লাইন ধরে নিচে নামানো */
+/* ================================================= */
+@media (max-width: 768px) {
+
+  /* হেডিং যেন সুন্দরভাবে ভাঙে/সেন্টার থাকে */
+  .header h1{
+    text-align: center;
+    line-height: 1.2;
+    word-break: break-word;
+    padding: 0 10px;
+  }
+
+  /* nav-bar কে কলামে আনো, সবকিছু সেন্টার */
+  .nav-bar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* ================================================= */
+  /* [M-FIX-2] মেনু গুলো নিচে নিচে, সব সেন্টার */
+  /* ================================================= */
+  .menu{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;    /* ✅ সব মেনু সেন্টার */
+    align-items: center;
+    gap: 10px;
+  }
+
+  .menu li{
+    flex: 0 0 auto;
+    text-align: center;
+  }
+
+  /* ================================================= */
+  /* [M-FIX-3] সার্চ এক লাইনে থাকবে + সেন্টার */
+  /* ================================================= */
+  #searchInput{
+    width: 92%;
+    max-width: 420px;
+    display: block;
+    margin: 0 auto;            /* ✅ এক লাইনে সেন্টার */
+  }
+
+  /* ================================================= */
+  /* [M-FIX-4] সোশাল আইকন এক লাইনে থাকবে */
+  /* ================================================= */
+  /* ⚠️ তোমার সোশাল আইকনের container যেই ক্লাস/আইডি, সেটা এখানে বসাও:
+     নিচে আমি সাধারণ কয়েকটা selector দিয়েছি—যেটা আছে সেটা কাজ করবে */
+  .social-icons, .social-bar, .social-row, .icon-bar{
+    display: flex;
+    flex-wrap: nowrap;          /* ✅ এক লাইনে */
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    overflow-x: auto;           /* বেশি হলে স্ক্রল হবে, কিন্তু body নড়বে না */
+    padding: 6px 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* scrollbar লুকালে সুন্দর দেখাবে (optional) */
+  .social-icons::-webkit-scrollbar,
+  .social-bar::-webkit-scrollbar,
+  .social-row::-webkit-scrollbar,
+  .icon-bar::-webkit-scrollbar{
+    height: 0px;
+  }
+
+  /* ================================================= */
+  /* [M-FIX-5] Toggle + ভাষা + Logout এক লাইনে একসাথে */
+  /* ================================================= */
+  /* ⚠️ তোমার এই বাটনগুলোর wrapper যেই ক্লাস/আইডি, সেটা এখানে বসাও */
+  .utility-actions, .top-actions, .right-actions, .auth-actions{
+    display: flex;
+    flex-wrap: nowrap;          /* ✅ এক লাইনে */
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    overflow-x: auto;
+    padding: 6px 8px;
+  }
+
+  .utility-actions::-webkit-scrollbar,
+  .top-actions::-webkit-scrollbar,
+  .right-actions::-webkit-scrollbar,
+  .auth-actions::-webkit-scrollbar{
+    height: 0px;
+  }
+
+  /* ================================================= */
+  /* [M-FIX-6] ফুটার সেন্টার (যদি আগেই থাকে তবুও সেফ) */
+  /* ================================================= */
+  .footer{
+    text-align: center;
+  }
+
+}
+/* ================================================= */
+/* [DD-LEFT] Mobile only: সাবমেনু বাম দিকে খুলবে */
+/* ================================================= */
+@media (max-width: 768px){
+
+  /* ১ম লেভেল ড্রপডাউন (বাংলাদেশ/ইন্ডিয়া/ইন্টারন্যাশনাল) স্ক্রিনের ভিতরে রাখে */
+  .dropdown-menu{
+    left: 0 !important;
+    right: auto !important;
+    max-width: 92vw;      /* স্ক্রিনের বাইরে না যায় */
+  }
+
+  /* সাবমেনু (বাংলা/ইংরেজি/পোর্টাল/লোকাল) — বাম দিকে খুলবে */
+  .dropdown-sub{
+    position: relative;   /* anchor ঠিক রাখতে */
+  }
+
+  .dropdown-menu-sub{
+    position: absolute !important;
+    top: 0 !important;
+
+    left: auto !important;
+    right: 100% !important;      /* ✅ বাম দিকে সরিয়ে দেয় */
+    margin-right: 8px;           /* মাঝখানে গ্যাপ */
+
+    min-width: 170px;
+    max-width: 70vw;
+    z-index: 3000;
+  }
+
+}
+/* ================================================= */
+/* [UL-M-OFF] Mobile only: Active menu red underline OFF */
+/* ================================================= */
+@media (max-width: 768px){
+  .menu-underline{
+    display: none !important;
+  }
+}
+/* ================================================= */
+/* [PC-FIX-2] Desktop: stop search expanding */
+/* ================================================= */
+@media (min-width: 1025px){
+  #searchInput{
+    width: 220px;        /* আপনি চাইলে 180/200/240 দিবেন */
+  }
+
+  #searchInput:hover,
+  #searchInput:focus{
+    width: 220px;        /* same width => আর বড় হবে না */
+  }
+}
+.menu-underline{
+  display: none !important;
+}

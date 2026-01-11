@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediaHub Login</title>
+
+  <!-- ================================================= -->
+  <!-- [L-HEAD] CSS LINKS -->
+  <!-- ================================================= -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+
+<body class="login-page">
+
+<!-- ================================================= -->
+<!-- [L-H] HEADER -->
+<!-- ================================================= -->
+<header class="login-header">
+  <h2>Li Cell News & Media Hub</h2>
+  <p>Secure Login Required</p>
+</header>
+
+<!-- ================================================= -->
+<!-- [L-M] MAIN LOGIN CARD WRAP -->
+<!-- ================================================= -->
+<div class="login-wrap">
+
+  <!-- ================================================= -->
+  <!-- [L-CARD] SPLIT LOGIN CARD -->
+  <!-- ================================================= -->
+  <div class="login-card split-login" id="loginCard">
+
+    <!-- ============================== -->
+    <!-- [L-SPLIT-1] LEFT SIDE (LOGO) -->
+    <!-- ============================== -->
+    <div class="login-left">
+      <img src="assets/logo.png" alt="MediaHub Logo" class="big-logo" />
+        <h2>MediaHub Login</h2>
+      <p>আপনার অ্যাকাউন্ট দিয়ে প্রবেশ করুন</p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- [L-SPLIT-2] RIGHT SIDE (FORM) -->
+    <!-- ============================== -->
+    <div class="login-right">
+
+      <label>Username</label>
+      <input type="text" id="username" placeholder="Enter username" />
+
+      <label>Password</label>
+      <div class="password-wrap">
+        <input type="password" id="password" placeholder="Enter password" />
+        <span class="show-btn" onclick="togglePass()">Show</span>
+      </div>
+
+      <!-- ✅ Remember Me -->
+      <div class="row-between">
+        <label class="remember-row">
+          <input type="checkbox" id="rememberMe" />
+          Remember me
+        </label>
+        <span class="forgot">Forgot password?</span>
+      </div>
+
+      <button class="login-btn" onclick="doLogin()">Login</button>
+      <div class="error-msg" id="errorMsg">❌ ভুল Username বা Password</div>
+
+      <div class="login-note">
+        ✅ Demo users: <b>admin</b> / <b>1234</b> , <b>editor</b> / <b>2222</b>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- [L-F] FOOTER -->
+<!-- ================================================= -->
+<footer class="login-footer">
+  © 2026 MediaHub | Developed by Digitalace
+</footer>
+<!-- ================================================= -->
+
+<!-- ================================================= -->
+<!-- [L-T] TOAST -->
+<!-- ================================================= -->
+<div class="toast" id="toastBox">
+  ✅ <span>Login successful! Welcome <strong id="toastUser">User</strong></span>
+</div>
+
+<!-- ================================================= -->
+<!-- [L-JS] LOGIN SCRIPT (UNCHANGED) -->
+<!-- ================================================= -->
+<script>
+  const USERS = [
+    { username: "admin",  password: "1234", role: "admin" },
+    { username: "editor", password: "2222", role: "editor" },
+    { username: "user",   password: "1111", role: "viewer" }
+  ];
+
+  function togglePass() {
+    const pass = document.getElementById("password");
+    const btn  = document.querySelector(".show-btn");
+    if (pass.type === "password") {
+      pass.type = "text";
+      btn.innerText = "Hide";
+    } else {
+      pass.type = "password";
+      btn.innerText = "Show";
+    }
+  }
+
+  function showToast(user) {
+    const toast = document.getElementById("toastBox");
+    document.getElementById("toastUser").innerText = user;
+    toast.style.display = "flex";
+    setTimeout(() => toast.style.display = "none", 1800);
+  }
+
+  function shakeCard() {
+    const card = document.getElementById("loginCard");
+    card.classList.add("shake");
+    setTimeout(() => card.classList.remove("shake"), 400);
+  }
+
+  function doLogin() {
+    const u = document.getElementById("username").value.trim();
+    const p = document.getElementById("password").value.trim();
+    const remember = document.getElementById("rememberMe").checked;
+
+    const errorMsg = document.getElementById("errorMsg");
+    errorMsg.style.display = "none";
+
+    const matched = USERS.find(x => x.username === u && x.password === p);
+
+    if (matched) {
+      localStorage.setItem("mediahub_logged_in", "true");
+      localStorage.setItem("mediahub_user", matched.username);
+      localStorage.setItem("mediahub_role", matched.role);
+
+      if (remember) localStorage.setItem("mediahub_remember", "true");
+      else localStorage.removeItem("mediahub_remember");
+
+      showToast(matched.username);
+
+      setTimeout(() => {
+        if (matched.role === "admin") window.location.href = "admin.html";
+        else window.location.href = "index.html";
+      }, 1200);
+
+    } else {
+      errorMsg.style.display = "block";
+      shakeCard();
+    }
+  }
+
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") doLogin();
+  });
+
+  if (localStorage.getItem("mediahub_remember") === "true") {
+    document.getElementById("rememberMe").checked = true;
+    document.getElementById("username").value = localStorage.getItem("mediahub_user") || "";
+  }
+
+  if (localStorage.getItem("mediahub_logged_in") === "true") {
+    const role = localStorage.getItem("mediahub_role");
+    if (role === "admin") window.location.href = "admin.html";
+    else window.location.href = "index.html";
+  }
+  
+</script>
+<script>
+  /* ================================================= */
+  /* [L-JS-0] DEFAULT USERS (FIRST TIME ONLY) */
+  /* ================================================= */
+  const DEFAULT_USERS = [
+    { username: "admin",  password: "1234", role: "admin" },
+    { username: "editor", password: "2222", role: "editor" },
+    { username: "user",   password: "1111", role: "viewer" }
+  ];
+
+  /* ================================================= */
+  /* [L-JS-1] GET USERS FROM localStorage */
+  /* ================================================= */
+  function getUsers() {
+    try {
+      return JSON.parse(localStorage.getItem("mediahub_users")) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  /* ================================================= */
+  /* [L-JS-2] SAVE USERS */
+  /* ================================================= */
+  function saveUsers(users) {
+    localStorage.setItem("mediahub_users", JSON.stringify(users));
+  }
+
+  /* ================================================= */
+  /* [L-JS-3] INIT USERS ONLY ON FIRST RUN */
+  /* ================================================= */
+  if (getUsers().length === 0) {
+    saveUsers(DEFAULT_USERS);
+  }
+
+  /* ================================================= */
+  /* [L-JS-4] TOGGLE PASSWORD */
+  /* ================================================= */
+  function togglePass() {
+    const pass = document.getElementById("password");
+    const btn  = document.querySelector(".show-btn");
+
+    if (pass.type === "password") {
+      pass.type = "text";
+      btn.innerText = "Hide";
+    } else {
+      pass.type = "password";
+      btn.innerText = "Show";
+    }
+  }
+
+  /* ================================================= */
+  /* [L-JS-5] SHAKE CARD */
+  /* ================================================= */
+  function shakeCard() {
+    const card = document.getElementById("loginCard");
+    card.classList.add("shake");
+    setTimeout(() => card.classList.remove("shake"), 400);
+  }
+
+  /* ================================================= */
+  /* [L-JS-6] SHOW ONLY LOGO OVERLAY (NO TEXT) */
+  /* ================================================= */
+  function showLogoOnly() {
+    const overlay = document.getElementById("logoOverlay");
+    if (!overlay) return;
+    overlay.style.display = "flex";
+  }
+
+  /* ================================================= */
+  /* [L-JS-7] LOGIN FUNCTION (USERS FROM ADMIN PANEL) */
+  /* ================================================= */
+  function doLogin() {
+    const u = document.getElementById("username").value.trim();
+    const p = document.getElementById("password").value.trim();
+    const remember = document.getElementById("rememberMe").checked;
+
+    const errorMsg = document.getElementById("errorMsg");
+    errorMsg.style.display = "none";
+
+    const USERS = getUsers(); /* ✅ now from localStorage */
+    const matched = USERS.find(x => x.username === u && x.password === p);
+
+    if (matched) {
+      localStorage.setItem("mediahub_logged_in", "true");
+      localStorage.setItem("mediahub_user", matched.username);
+      localStorage.setItem("mediahub_role", matched.role);
+
+      /* ✅ remember username */
+      if (remember) localStorage.setItem("mediahub_remember", "true");
+      else localStorage.removeItem("mediahub_remember");
+
+      /* ✅ show logo screen only */
+      showLogoOnly();
+
+      /* ✅ redirect */
+      setTimeout(() => {
+        if (matched.role === "admin") window.location.href = "admin.html";
+        else window.location.href = "index.html";
+      }, 900);
+
+    } else {
+      errorMsg.style.display = "block";
+      shakeCard();
+    }
+  }
+
+  /* ================================================= */
+  /* [L-JS-8] ENTER KEY SUPPORT */
+  /* ================================================= */
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") doLogin();
+  });
+
+  /* ================================================= */
+  /* [L-JS-9] REMEMBER USERNAME */
+  /* ================================================= */
+  if (localStorage.getItem("mediahub_remember") === "true") {
+    document.getElementById("rememberMe").checked = true;
+    document.getElementById("username").value =
+      localStorage.getItem("mediahub_user") || "";
+  }
+
+  /* ================================================= */
+  /* [L-JS-10] ALREADY LOGGED IN? */
+  /* ================================================= */
+  if (localStorage.getItem("mediahub_logged_in") === "true") {
+    const role = localStorage.getItem("mediahub_role");
+    if (role === "admin") window.location.href = "admin.html";
+    else window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>

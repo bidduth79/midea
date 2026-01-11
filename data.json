@@ -1,0 +1,259 @@
+{
+  "menu": [
+    
+  ],
+  "facebook": [
+    {
+      "title": "Facebook (Demo)",
+      "subtitle": "Add your page links",
+      "logo": "images/facebook.png",
+      "link": "https://www.facebook.com"
+    }
+  ],
+  "propagandist": [
+    {
+      "title": "Custom Link (Demo)",
+      "subtitle": "You can add any link here",
+      "logo": "images/link.png",
+      "link": "https://example.com"
+    }
+  ],
+  "youtube": [
+    {
+      "title": "YouTube (Demo)",
+      "subtitle": "Add your channel links",
+      "logo": "images/youtube.png",
+      "link": "https://www.youtube.com/@PinakiBhattacharya"
+    }
+  ],
+  "talkshow": [
+    {
+      "title": "Talkshow (Demo)",
+      "subtitle": "Add talkshow playlist links",
+      "logo": "images/talkshow.png",
+      "link": "https://www.youtube.com"
+    }
+  ],
+  "newspaper": [
+  {
+    "title": "প্রথম আলো",
+    "subtitle": "Bangla Newspaper (BD)",
+    "logo": "images/pro.png",
+    "link": "https://www.prothomalo.com",
+    "lang": "bn",
+    "country": "bd",
+    "scope": "national"
+  },
+  {
+    "title": "কালের কণ্ঠ",
+    "subtitle": "Bangla Newspaper (BD)",
+    "logo": "images/kalerkantho.png",
+    "link": "https://www.kalerkantho.com",
+    "lang": "bn",
+    "country": "bd",
+    "scope": "national"
+  },
+  {
+    "title": "ইত্তেফাক",
+    "subtitle": "Bangla Newspaper (BD)",
+    "logo": "images/ittefaq.png",
+    "link": "https://www.ittefaq.com.bd",
+    "lang": "bn",
+    "country": "bd",
+    "scope": "national"
+  },
+  {
+    "title": "সমকাল",
+    "subtitle": "Bangla Newspaper (BD)",
+    "logo": "images/SAMAKAL.png",
+    "link": "https://samakal.com",
+    "lang": "bn",
+    "country": "bd",
+    "scope": "national"
+  },
+  {
+    "title": "যুগান্তর",
+    "subtitle": "Bangla Newspaper (BD)",
+    "logo": "images/jugantor.png",
+    "link": "https://www.jugantor.com",
+    "lang": "bn",
+    "country": "bd",
+    "scope": "national"
+  },
+  {
+    "title": "জনকণ্ঠ",
+    "subtitle": "Bangla Newspaper (BD)",
+    "logo": "images/janakantha.png",
+    "link": "https://www.dailyjanakantha.com",
+    "lang": "bn",
+    "country": "bd",
+    "scope": "national"
+  },
+  {
+    "title": "bdnews24",
+    "subtitle": "Online News Portal (BD)",
+    "logo": "images/bdnews24.png",
+    "link": "https://bdnews24.com",
+    "lang": "bn",
+    "country": "bd",
+    "type": "portal",
+    "scope": "national"
+  },
+  {
+    "title": "Bangla Tribune",
+    "subtitle": "Online News Portal (BD)",
+    "logo": "images/banglatribune.png",
+    "link": "https://www.banglatribune.com",
+    "lang": "bn",
+    "country": "bd",
+    "type": "portal",
+    "scope": "national"
+  },
+  {
+    "title": "Dhaka Post",
+    "subtitle": "Online News Portal (BD)",
+    "logo": "images/dhakapost.png",
+    "link": "https://www.dhakapost.com",
+    "lang": "bn",
+    "country": "bd",
+    "type": "portal",
+    "scope": "national"
+  },
+  {
+    "title": "The Daily Star",
+    "subtitle": "English Newspaper (BD)",
+    "logo": "images/tds.png",
+    "link": "https://www.thedailystar.net",
+    "lang": "en",
+    "country": "bd",
+    "scope": "national"
+  },
+  {
+    "title": "Dhaka Tribune",
+    "subtitle": "English Newspaper (BD)",
+    "logo": "images/dhakatribuneen.png",
+    "link": "https://www.dhakatribune.com",
+    "lang": "en",
+    "country": "bd",
+    "scope": "national"
+  },
+  {
+    "title": "The Financial Express",
+    "subtitle": "English Newspaper (BD)",
+    "logo": "images/financialexpress.png",
+    "link": "https://thefinancialexpress.com.bd",
+    "lang": "en",
+    "country": "bd",
+    "scope": "national"
+  },
+  {
+    "title": "আজকের কুমিল্লা",
+    "subtitle": "Local Newspaper (Cumilla)",
+    "logo": "images/Ak.png",
+    "link": "https://www.ajkercomilla.com",
+    "lang": "bn",
+    "country": "bd",
+    "scope": "local"
+  },
+  {
+    "title": "চট্টগ্রাম প্রতিদিন",
+    "subtitle": "Local Newspaper (Chattogram)",
+    "logo": "images/ctgpratidin.png",
+    "link": "https://ctgpratidin.com",
+    "lang": "bn",
+    "country": "bd",
+    "scope": "local"
+  },
+  {
+    "title": "Anandabazar Patrika",
+    "subtitle": "Bangla Newspaper (India)",
+    "logo": "images/anandabazar.png",
+    "link": "https://www.anandabazar.com",
+    "lang": "bn",
+    "country": "in",
+    "scope": "national"
+  },
+  {
+    "title": "Ei Samay",
+    "subtitle": "Bangla Newspaper (India)",
+    "logo": "images/eisamay.png",
+    "link": "https://eisamay.com",
+    "lang": "bn",
+    "country": "in",
+    "scope": "national"
+  },
+  {
+    "title": "Bartaman",
+    "subtitle": "Bangla Newspaper (India)",
+    "logo": "images/bartaman.png",
+    "link": "https://bartamanpatrika.com",
+    "lang": "bn",
+    "country": "in",
+    "scope": "national"
+  },
+  {
+    "title": "The Times of India",
+    "subtitle": "English Newspaper (India)",
+    "logo": "images/toi.png",
+    "link": "https://timesofindia.indiatimes.com",
+    "lang": "en",
+    "country": "in",
+    "scope": "national"
+  },
+  {
+    "title": "The Hindu",
+    "subtitle": "English Newspaper (India)",
+    "logo": "images/thehindu.png",
+    "link": "https://www.thehindu.com",
+    "lang": "en",
+    "country": "in",
+    "scope": "national"
+  },
+  {
+    "title": "Hindustan Times",
+    "subtitle": "English Newspaper (India)",
+    "logo": "images/ht.png",
+    "link": "https://www.hindustantimes.com",
+    "lang": "en",
+    "country": "in",
+    "scope": "national"
+  },
+  {
+    "title": "BBC News",
+    "subtitle": "International News",
+    "logo": "images/BBC.png",
+    "link": "https://www.bbc.com/news",
+    "lang": "en",
+    "country": "intl",
+    "scope": "national"
+  },
+  {
+    "title": "Al Jazeera",
+    "subtitle": "International News",
+    "logo": "images/AlJazeera.png",
+    "link": "https://www.aljazeera.com",
+    "lang": "en",
+    "country": "intl",
+    "scope": "national"
+  },
+  {
+    "title": "CNN",
+    "subtitle": "International News",
+    "logo": "images/cnn.png",
+    "link": "https://edition.cnn.com",
+    "lang": "en",
+    "country": "intl",
+    "scope": "national"
+  },
+  {
+    "title": "The Guardian",
+    "subtitle": "International Newspaper",
+    "logo": "images/tg.png",
+    "link": "https://www.theguardian.com",
+    "lang": "en",
+    "country": "intl",
+    "scope": "national"
+  }
+]
+
+}

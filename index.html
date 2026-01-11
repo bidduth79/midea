@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Li Cell News & Media Hub</title>
+
+  <!-- [H-0] Main CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- [SocialB-01] FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="hub-page">
+
+<!-- ================================================= -->
+<!-- [A] LOGIN GUARD -->
+<!-- ================================================= -->
+<script>
+  if (localStorage.getItem("mediahub_logged_in") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<!-- ================================================= -->
+<!-- [H] HEADER -->
+<!-- ================================================= -->
+<header class="header">
+
+  <!-- ============================== -->
+  <!-- [H-0.1] SITE TITLE (CENTER) -->
+  <!-- ============================== -->
+  <h1 class="hub-title">📰 LICELL NEWS&MEDIA HUB</h1>
+
+  <nav class="nav-bar">
+
+    <!-- ============================== -->
+    <!-- [H-L] LEFT (RESERVED) -->
+    <!-- ✅ Future: logo / extra button -->
+    <!-- ============================== -->
+    <div class="nav-left"></div>
+
+    <!-- ============================== -->
+    <!-- [H-C] CENTER (MENU) -->
+    <!-- ✅ Menu stays centered -->
+    <!-- ============================== -->
+    <div class="nav-center">
+      
+      <ul class="menu" id="mainMenu">
+        
+
+        <!-- [H-C-1] MENU -->
+        <li id="nav-menu" onclick="loadCategory('menu')" oncontextmenu="openAllCategory('menu'); return false;">মেনু</li>
+
+        <!-- [H-C-2] NEWSPAPER DROPDOWN -->
+        <li class="dropdown" id="nav-newspaper"
+            onclick="handleNewspaperClick(event)"
+            oncontextmenu="openAllNewspapers(); return false;">
+          নিউজপেপার
+
+          <ul class="dropdown-menu">
+
+            <!-- [H-C-2.1] বাংলাদেশ -->
+            <li class="dropdown-sub"
+                onclick="loadNewspaperFilter({ country: 'bd' }); event.stopPropagation(); return false;"
+                oncontextmenu="openAllNewspapers({ country: 'bd' }); event.stopPropagation(); return false;">
+              বাংলাদেশ
+
+              <ul class="dropdown-menu-sub">
+                <li onclick="loadNewspaperFilter({ country: 'bd', lang: 'bn' }); event.stopPropagation(); return false;"
+                    oncontextmenu="openAllNewspapers({ country: 'bd', lang: 'bn' }); event.stopPropagation(); return false;">
+                  বাংলা
+                </li>
+
+                <li onclick="loadNewspaperFilter({ country: 'bd', lang: 'en' }); event.stopPropagation(); return false;"
+                    oncontextmenu="openAllNewspapers({ country: 'bd', lang: 'en' }); event.stopPropagation(); return false;">
+                  ইংরেজি
+                </li>
+
+                <li onclick="loadNewspaperFilter({ country: 'bd', type: 'portal' }); event.stopPropagation(); return false;"
+                    oncontextmenu="openAllNewspapers({ country: 'bd', type: 'portal' }); event.stopPropagation(); return false;">
+                  অনলাইন পোর্টাল
+                </li>
+
+                <li onclick="loadNewspaperFilter({ country: 'bd', scope: 'local' }); event.stopPropagation(); return false;"
+                    oncontextmenu="openAllNewspapers({ country: 'bd', scope: 'local' }); event.stopPropagation(); return false;">
+                  লোকাল
+                </li>
+              </ul>
+            </li>
+
+            <!-- [H-C-2.2] ইন্ডিয়া -->
+            <li class="dropdown-sub"
+                onclick="loadNewspaperFilter({ country: 'in' }); event.stopPropagation(); return false;"
+                oncontextmenu="openAllNewspapers({ country: 'in' }); event.stopPropagation(); return false;">
+              ইন্ডিয়া
+
+              <ul class="dropdown-menu-sub">
+                <li onclick="loadNewspaperFilter({ country: 'in', lang: 'bn' }); event.stopPropagation(); return false;"
+                    oncontextmenu="openAllNewspapers({ country: 'in', lang: 'bn' }); event.stopPropagation(); return false;">
+                  বাংলা
+                </li>
+
+                <li onclick="loadNewspaperFilter({ country: 'in', lang: 'en' }); event.stopPropagation(); return false;"
+                    oncontextmenu="openAllNewspapers({ country: 'in', lang: 'en' }); event.stopPropagation(); return false;">
+                  ইংরেজি
+                </li>
+
+                <li onclick="loadNewspaperFilter({ country: 'in', type: 'portal' }); event.stopPropagation(); return false;"
+                    oncontextmenu="openAllNewspapers({ country: 'in', type: 'portal' }); event.stopPropagation(); return false;">
+                  অনলাইন পোর্টাল
+                </li>
+
+                <li onclick="loadNewspaperFilter({ country: 'in', scope: 'local' }); event.stopPropagation(); return false;"
+                    oncontextmenu="openAllNewspapers({ country: 'in', scope: 'local' }); event.stopPropagation(); return false;">
+                  লোকাল
+                </li>
+              </ul>
+            </li>
+
+            <!-- [H-C-2.3] ইন্টারন্যাশনাল -->
+            <li onclick="loadNewspaperFilter({ country: 'intl' }); event.stopPropagation(); return false;"
+                oncontextmenu="openAllNewspapers({ country: 'intl' }); event.stopPropagation(); return false;">
+              ইন্টারন্যাশনাল
+            </li>
+
+          </ul>
+        </li>
+
+        <!-- [H-C-3] OTHER CATEGORIES -->
+        <li id="nav-facebook" onclick="loadCategory('facebook')" oncontextmenu="openAllCategory('facebook'); return false;">ফেসবুক</li>
+        <li id="nav-propagandist" onclick="loadCategory('propagandist')" oncontextmenu="openAllCategory('propagandist'); return false;">প্রবাগান্ডিস্ট</li>
+        <li id="nav-youtube" onclick="loadCategory('youtube')" oncontextmenu="openAllCategory('youtube'); return false;">ইউটিউব</li>
+        <li id="nav-talkshow" onclick="loadCategory('talkshow')" oncontextmenu="openAllCategory('talkshow'); return false;">টকশো</li>
+
+        <!-- [H-C-4] TOOLS -->
+        <!--<li onclick="window.location.href='transcriber/transcriber.html'">🎙️ Transcriber</li>-->
+        <li onclick="window.location.href='tools/index.html'">Tools</li>
+        <li onclick="loadIframePage()">Media</li>
+
+      </ul>
+    </div>
+
+    <!-- ============================== -->
+    <!-- [H-R] RIGHT (SEARCH + SOCIAL + TOGGLE + LOGOUT) -->
+    <!-- ✅ All aligned right -->
+    <!-- ============================== -->
+    <div class="nav-right">
+
+      <!-- [H-R-1] SEARCH BOX -->
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="Search..." onkeyup="filterCards()" />
+        <button id="clearSearchBtn" class="clear-search" onclick="clearSearch()" title="Clear">✖</button>
+      </div>
+
+      <!-- [H-R-2] RIGHT ACTIONS GROUP -->
+      <div class="right-actions">
+
+        <!-- [SocialB-02] LIVE + Social Buttons -->
+        <div class="social-bar">
+          <a href="#" class="live-btn">LIVE</a>
+
+          <a href="https://facebook.com" target="_blank" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com" target="_blank" class="social-icon tw"><i class="fab fa-twitter"></i></a>
+          <a href="https://instagram.com" target="_blank" class="social-icon ig"><i class="fab fa-instagram"></i></a>
+          <a href="https://pinterest.com" target="_blank" class="social-icon pt"><i class="fab fa-pinterest-p"></i></a>
+          <a href="https://youtube.com" target="_blank" class="social-icon yt"><i class="fab fa-youtube"></i></a>
+          <a href="rss.xml" target="_blank" class="social-icon rss"><i class="fa-solid fa-rss"></i></a>
+        </div>
+
+        <!-- [THEME] Theme Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+
+        <!-- ============================== -->
+        <!-- [LANG] Language Toggle -->
+        <!-- ============================== -->
+        <button id="langToggleBtn" class="lang-toggle" onclick="toggleLang()">বাংলা</button>
+
+
+        <!-- [H-R-3] LOGOUT BUTTON -->
+        <button onclick="logout()" id="logoutBtn">🔒 Logout</button>
+
+      </div>
+    </div>
+
+  </nav>
+</header>
+
+<!-- ================================================= -->
+<!-- [M] MAIN -->
+<!-- ================================================= -->
+<main>
+  <div id="content" class="card-container">
+    <p>উপরের মেনু থেকে একটি নির্বাচন করুন</p>
+  </div>
+</main>
+
+<!-- ================================================= -->
+<!-- [F] FOOTER -->
+<!-- ================================================= -->
+<footer class="footer">© 2026 | Media Cell</footer>
+
+<!-- ================================================= -->
+<!-- [B] Back to Top -->
+<!-- ================================================= -->
+<button id="backToTop" onclick="scrollToTop()">↑</button>
+
+<!-- ================================================= -->
+<!-- [JS] Script -->
+<!-- ================================================= -->
+<script src="script.js"></script>
+
+<!-- ================================================= -->
+<!-- [SB] Right Sidebar -->
+<!-- ================================================= -->
+<div id="sidePanel" class="side-panel">
+  <div class="side-panel-header">
+    <div class="side-panel-title-wrap">
+      <span id="sidePanelTitle">Preview</span>
+      <span id="sidePanelSub" class="side-panel-sub"></span>
+    </div>
+
+    <div class="side-panel-actions">
+      <button type="button" onclick="toggleSidePanelPosition()" title="Left/Right">⇆</button>
+      <button type="button" onclick="toggleSidePanelWidth()" title="Width">↔</button>
+      <button type="button" onclick="openSidePanelInNewTab()" title="Open in new tab">⧉</button>
+      <button type="button" onclick="closeSidePanel()" title="Close">✖</button>
+    </div>
+  </div>
+
+  <div class="side-panel-history">
+    <div class="history-label">History</div>
+    <div id="sidePanelHistory" class="history-list"></div>
+    <button type="button" class="history-clear" onclick="clearSidePanelHistory()">Clear</button>
+  </div>
+
+  <div class="side-panel-body">
+    <iframe id="sidePanelFrame" src="" loading="lazy"></iframe>
+
+    <div id="sidePanelFallback" class="side-panel-fallback">
+      <div class="fallback-box">
+        <div class="fallback-title">এই সাইটটি এখানে দেখানো যাচ্ছে না</div>
+        <div class="fallback-sub">অনেক সাইট iframe ব্লক করে।</div>
+        <div class="fallback-actions">
+          <button type="button" onclick="openSidePanelInNewTab()">New Tab এ খুলুন</button>
+          <button type="button" onclick="retrySidePanel()">Retry</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
